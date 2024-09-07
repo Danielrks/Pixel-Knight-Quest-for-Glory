@@ -12,15 +12,17 @@ var attacked = false
 var enemies = []
 var attacked_range = false
 var attacking = false
+var played_attack = false
 func _physics_process(delta: float) -> void:
 	sprite.play(current_animation)
-	print(attacked)
+	print("current", current_animation)
 	attacked = false
 	attacking = false
 	print("Player Health: ", Health)
 	print("Player Mana: ", Mana)
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		current_animation = "fall"
 	if attacked_range:
 		for enemy in enemies:
 			if enemy.has_method("return_attacking"):
@@ -65,21 +67,24 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		current_animation = "jump"
-	if Input.is_action_just_pressed("Left_Click") and not Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right") and current_animation != "fall": #and current_animation != "damaged":
+	if Input.is_action_just_pressed("Left_Click") and not Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right") and current_animation != "fall" and played_attack == false: #and current_animation != "damaged":
 		current_animation = "attack_one"
 		attacking = true
+		played_attack = true
 	#if Input.is_action_just_released("Left_Click") and not Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right") and current_animation != "fall":
 		#current_animation = "idle"
 		#ttacking = false
-	if Input.is_action_just_pressed("Right_Click") and not Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right") and current_animation != "fall": #and current_animation != "damaged":
+	if Input.is_action_just_pressed("Right_Click") and not Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right") and current_animation != "fall" and played_attack == false: #and current_animation != "damaged":
 		attacking = true
 		current_animation = "attack_two"
+		played_attack = true
 	#if Input.is_action_just_released("Right_Click") and not Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right") and current_animation != "fall":
 		#current_animation = "idle"
 		#attacking = false
-	if Input.is_action_just_pressed("Scroll_Wheel") and not Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right") and current_animation != "fall": #and current_animation != "damaged":
+	if Input.is_action_just_pressed("Scroll_Wheel") and not Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right") and current_animation != "fall" and played_attack == false: #and current_animation != "damaged":
 		attacking = true
 		current_animation = "attack_three"
+		played_attack = true
 	#if Input.is_action_just_released("Scroll_Wheel") and not Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right") and current_animation != "fall":
 		#current_animation = "idle"
 		#attacking = false
@@ -113,12 +118,15 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		current_animation = "idle"
 	if current_animation == "jump":
 		current_animation =  "fall"
-	if current_animation == "attack_one" or "attack_two" or "attack_three":
+	if current_animation == "attack_one" or current_animation == "attack_two" or current_animation =="attack_three":
 		current_animation = "idle"
+		played_attack = false
 	if current_animation == "idle" or "walking" or "jump" or "fall":
 		if Mana != 100:
 			Mana += 1
-	
+	if current_animation == "fall":
+		if is_on_floor():
+			current_animation = "idle"
 func _on_animated_sprite_2d_animation_looped() -> void:
 	#if current_animation == "attack_one":
 		#attacking = true
@@ -126,13 +134,16 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 		current_animation = "idle"
 	if current_animation == "jump":
 		current_animation = "fall"
-	if current_animation == "attack_one" or "attack_two" or "attack_three":
+	if current_animation == "attack_one" or current_animation == "attack_two" or current_animation =="attack_three":
 		current_animation = "idle"
+		played_attack = false
 	if current_animation == "idle" or "walking" or "jump" or "fall":
 		if Mana != 100:
 			Mana += 1
-	if is_on_floor():
-		current_animation = "idle"
+	if current_animation == "fall":
+		if is_on_floor():
+			current_animation = "idle"
+		
 func ReturnAttacking():
 	return attacking
 

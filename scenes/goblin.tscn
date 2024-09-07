@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://da7hlt804agk8" path="res://assets/Monsters_Creatures_Fantasy/Monsters_Creatures_Fantasy/Goblin/Run.png" id="6_mx2nt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnyk7"]
-size = Vector2(34, 41)
+size = Vector2(22, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wxt1d"]
 atlas = ExtResource("2_bh3pw")
@@ -239,7 +239,7 @@ a = Vector2(20, 21)
 b = Vector2(158, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n70vw"]
-size = Vector2(89, 42)
+size = Vector2(66, 26)
 
 [node name="goblin" type="CharacterBody2D"]
 collision_layer = 4
@@ -247,11 +247,12 @@ collision_mask = 8
 script = ExtResource("1_7bkus")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 21.5)
+position = Vector2(0, 29)
 shape = SubResource("RectangleShape2D_rnyk7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1, 4)
+position = Vector2(2.38419e-07, 14)
+scale = Vector2(0.72, 0.72)
 sprite_frames = SubResource("SpriteFrames_1mjsg")
 animation = &"attack_one"
 autoplay = "idle"
@@ -261,7 +262,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area_1"]
-position = Vector2(25, 3)
+position = Vector2(13, 6)
 shape = SubResource("SegmentShape2D_sgols")
 
 [node name="Detection_Area_2" type="Area2D" parent="."]
@@ -269,7 +270,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area_2"]
-position = Vector2(-202, 2)
+position = Vector2(-191, 6)
 shape = SubResource("SegmentShape2D_sgols")
 
 [node name="Attack_Area" type="Area2D" parent="."]
@@ -277,7 +278,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_Area"]
-position = Vector2(0.5, 21)
+position = Vector2(0, 29)
 shape = SubResource("RectangleShape2D_n70vw")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

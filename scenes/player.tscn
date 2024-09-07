@@ -259,7 +259,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cqt8f")
 }],
-"loop": false,
+"loop": true,
 "name": &"Death",
 "speed": 5.0
 }, {
@@ -368,7 +368,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_apt4m")
 }],
-"loop": false,
+"loop": true,
 "name": &"hurt",
 "speed": 10.0
 }, {
@@ -403,7 +403,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_orsyy")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -446,28 +446,31 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cpnjq")
 }],
-"loop": false,
+"loop": true,
 "name": &"walking",
 "speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ei5vd"]
-size = Vector2(23, 49)
+size = Vector2(23, 41)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt5v4"]
-size = Vector2(93, 49.5)
+size = Vector2(78, 41.375)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 3
 script = ExtResource("1_7nwpe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -4.875)
+scale = Vector2(0.925926, 0.898)
 sprite_frames = SubResource("SpriteFrames_o8rrj")
-animation = &"attack_one"
+animation = &"fall"
 autoplay = "idle"
+frame_progress = 0.978835
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 14.5)
+position = Vector2(0, 9.5)
 shape = SubResource("RectangleShape2D_ei5vd")
 
 [node name="Attack_Attacked_Area" type="Area2D" parent="."]
@@ -475,7 +478,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_Attacked_Area"]
-position = Vector2(-0.5, 14.75)
+position = Vector2(0, 9.6875)
 shape = SubResource("RectangleShape2D_pt5v4")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
