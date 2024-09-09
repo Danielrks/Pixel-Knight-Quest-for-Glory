@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://bc02f6n32joe3"]
+[gd_scene load_steps=14 format=4 uid="uid://bc02f6n32joe3"]
 
 [ext_resource type="PackedScene" uid="uid://dq4imiywknlxa" path="res://scenes/player.tscn" id="1_astfe"]
 [ext_resource type="Texture2D" uid="uid://1pf3ef2152ro" path="res://assets/FreeCuteTileset/Tileset.png" id="2_w306q"]
 [ext_resource type="Texture2D" uid="uid://bv8hrpuyljkgk" path="res://assets/FreeCuteTileset/Decors.png" id="3_0wxie"]
-[ext_resource type="PackedScene" uid="uid://vla0x28qp4h2" path="res://scenes/mana_bar.tscn" id="3_aumd0"]
 [ext_resource type="PackedScene" uid="uid://kc3idqbyageu" path="res://scenes/goblin.tscn" id="3_rwhba"]
 [ext_resource type="Texture2D" uid="uid://brma1v36urq64" path="res://assets/FreeCuteTileset/ExampleTiles.png" id="4_8ko4k"]
 [ext_resource type="Texture2D" uid="uid://ctgdkjwsbi508" path="res://assets/FreeCuteTileset/BG1.png" id="4_u3d8o"]
@@ -96,7 +95,6 @@ texture = ExtResource("4_8ko4k")
 
 [sub_resource type="TileSet" id="TileSet_fi22x"]
 physics_layer_0/collision_layer = 9
-physics_layer_0/collision_mask = 512
 sources/0 = SubResource("TileSetAtlasSource_g0l5d")
 sources/1 = SubResource("TileSetAtlasSource_ed2lb")
 sources/3 = SubResource("TileSetAtlasSource_6alry")
@@ -113,14 +111,8 @@ zoom = Vector2(2, 2)
 [node name="Health_Bar" parent="Player/Camera2D" instance=ExtResource("9_tfqwf")]
 offset_left = -326.0
 offset_top = -180.0
-offset_right = -145.0
+offset_right = -86.0
 offset_bottom = -170.0
-
-[node name="Mana_Bar" parent="Player/Camera2D" instance=ExtResource("3_aumd0")]
-offset_left = -326.0
-offset_top = -165.0
-offset_right = -176.0
-offset_bottom = -155.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(1, 0)
@@ -129,10 +121,15 @@ tile_map_data = PackedByteArray("AAAAABcAAAAAAAAAAAAAABgAAAAAAAEAAAABABcAAAABAAA
 tile_set = SubResource("TileSet_fi22x")
 metadata/_edit_group_ = true
 
+[node name="goblin" parent="." instance=ExtResource("3_rwhba")]
+position = Vector2(255, 83)
+
+[node name="goblin2" parent="." instance=ExtResource("3_rwhba")]
+position = Vector2(185, 85)
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -2
 motion_scale = Vector2(0, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/sky"]
@@ -142,7 +139,6 @@ texture = ExtResource("4_u3d8o")
 centered = false
 
 [node name="clouds" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -2
 motion_mirroring = Vector2(320, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/clouds"]
@@ -152,7 +148,6 @@ texture = ExtResource("5_63vlo")
 centered = false
 
 [node name="mountains_1" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -2
 motion_mirroring = Vector2(1, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/mountains_1"]
@@ -162,7 +157,6 @@ texture = ExtResource("6_4070a")
 centered = false
 
 [node name="mountains_2" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -2
 motion_mirroring = Vector2(1, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/mountains_2"]
@@ -170,6 +164,3 @@ position = Vector2(360, 136)
 scale = Vector2(1.125, 2.25)
 texture = ExtResource("6_4070a")
 centered = false
-
-[node name="goblin" parent="." instance=ExtResource("3_rwhba")]
-position = Vector2(400, 424)

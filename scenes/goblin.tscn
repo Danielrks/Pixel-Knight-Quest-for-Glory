@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://kc3idqbyageu"]
+[gd_scene load_steps=40 format=3 uid="uid://kc3idqbyageu"]
 
 [ext_resource type="Script" path="res://Scripts/Goblin.gd" id="1_7bkus"]
 [ext_resource type="Texture2D" uid="uid://bne5h7ldcoiog" path="res://assets/Monsters_Creatures_Fantasy/Monsters_Creatures_Fantasy/Goblin/Idle.png" id="1_shs82"]
@@ -168,7 +168,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"death",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -234,14 +234,17 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_sgols"]
-a = Vector2(20, 21)
-b = Vector2(158, 21)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5np7p"]
+size = Vector2(107, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxobt"]
+size = Vector2(107, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n70vw"]
 size = Vector2(66, 26)
 
 [node name="goblin" type="CharacterBody2D"]
+z_index = 3
 collision_layer = 4
 collision_mask = 8
 script = ExtResource("1_7bkus")
@@ -254,24 +257,25 @@ shape = SubResource("RectangleShape2D_rnyk7")
 position = Vector2(2.38419e-07, 14)
 scale = Vector2(0.72, 0.72)
 sprite_frames = SubResource("SpriteFrames_1mjsg")
-animation = &"attack_one"
+animation = &"death"
 autoplay = "idle"
+frame_progress = 0.278844
 
 [node name="Detection_Area_1" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area_1"]
-position = Vector2(13, 6)
-shape = SubResource("SegmentShape2D_sgols")
+position = Vector2(86.5, 21)
+shape = SubResource("RectangleShape2D_5np7p")
 
 [node name="Detection_Area_2" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area_2"]
-position = Vector2(-191, 6)
-shape = SubResource("SegmentShape2D_sgols")
+position = Vector2(-86, 21)
+shape = SubResource("RectangleShape2D_yxobt")
 
 [node name="Attack_Area" type="Area2D" parent="."]
 collision_layer = 0
@@ -280,6 +284,14 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_Area"]
 position = Vector2(0, 29)
 shape = SubResource("RectangleShape2D_n70vw")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(33, -2)
+collision_mask = 512
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(-33, -2)
+collision_mask = 512
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

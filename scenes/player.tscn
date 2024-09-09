@@ -458,6 +458,7 @@ size = Vector2(23, 41)
 size = Vector2(78, 41.375)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 4
 collision_layer = 3
 script = ExtResource("1_7nwpe")
 
@@ -465,9 +466,9 @@ script = ExtResource("1_7nwpe")
 position = Vector2(1, -4.875)
 scale = Vector2(0.925926, 0.898)
 sprite_frames = SubResource("SpriteFrames_o8rrj")
-animation = &"fall"
+animation = &"attack_three"
 autoplay = "idle"
-frame_progress = 0.978835
+frame_progress = 0.719138
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9.5)
@@ -481,7 +482,10 @@ collision_mask = 4
 position = Vector2(0, 9.6875)
 shape = SubResource("RectangleShape2D_pt5v4")
 
+[node name="heal_timer" type="Timer" parent="."]
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="body_entered" from="Attack_Attacked_Area" to="." method="_on_attack_attacked_area_body_entered"]
 [connection signal="body_exited" from="Attack_Attacked_Area" to="." method="_on_attack_attacked_area_body_exited"]
+[connection signal="timeout" from="heal_timer" to="." method="_on_heal_timer_timeout"]

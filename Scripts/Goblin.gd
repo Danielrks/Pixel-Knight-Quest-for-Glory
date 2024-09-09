@@ -1,12 +1,17 @@
 extends CharacterBody2D
 
 @onready var sprite = $AnimatedSprite2D
-@onready var detection_area = $Detection_Areas
+#@onready var detection_area = $Detection_Areas
+@onready var ray_cast_1 =  $RayCast2D
+@onready var ray_cast_2 =  $RayCast2D2
+@onready var health_bar = $"../goblin3/Health_Bar_enemy"
+@onready var Player = $"../Player"
 
 const SPEED = 150.0
 const JUMP_VELOCITY = -250.0
-var Health = 30
-
+var Health = 50
+var left = true
+var right = false
 var target_position = Vector2(0, 0)
 var player = null
 var chase = false
@@ -19,9 +24,13 @@ var hurt = false
 	#collision_layer = 1 << 2  # "Enemies" layer is the 3rd layer
 	#collision_mask = ~(1 << 2)  # Invert the mask to exclude the "Enemies" layer
 	
+func _ready() -> void:
+	#health_bar.init_Health(Health)
+		pass
 func _physics_process(delta: float) -> void:
 	# Add gravity
-
+	#if Health <= 0:
+		#queue_free()
 	velocity += get_gravity() * delta
 	attacking = false
 	attacked = false
@@ -80,7 +89,8 @@ func _physics_process(delta: float) -> void:
 			
 		elif attacked:
 			sprite.play("hurt")
-			Health -= 10
+			Health -= Player.Damage
+			#health_bar.health = Health
 			print(Health, "goblin")
 			hurt = true
 		if not attacked and not hurt:
@@ -90,8 +100,18 @@ func _physics_process(delta: float) -> void:
 		
 	
 	else:
-		velocity.x = 0
-		sprite.play("idle")
+		if not ray_cast_1.is_colliding() and is_on_floor() or not ray_cast_2.is_colliding() and is_on_floor():
+			sprite.play("walking")
+			if left:
+				velocity.x += 10
+			if right:
+				velocity.x -= 10
+		else:
+			velocity.x = 0
+			sprite.play("idle")
+		
+				
+			
 	
 		
 
@@ -172,8 +192,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		attacked = false
 		hurt = false
 	if sprite.animation == "death":
-		queue_free()
-
+		#Death_Timer.start()
+		pass
 
 func _on_animated_sprite_2d_animation_looped() -> void:
 	if sprite.animation == "attack_one":
@@ -184,3 +204,4 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 		hurt = false
 	if sprite.animation == "death":
 		queue_free()
+		pass
