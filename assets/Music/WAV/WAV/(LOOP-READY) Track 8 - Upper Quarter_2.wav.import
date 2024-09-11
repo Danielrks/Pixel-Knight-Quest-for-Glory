@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dctnjyyyw84im"
+path="res://.godot/imported/(LOOP-READY) Track 8 - Upper Quarter_2.wav-0223f4c97e4a6b4a1c11b938833dc70e.sample"
+
+[deps]
+
+source_file="res://assets/Music/WAV/WAV/(LOOP-READY) Track 8 - Upper Quarter_2.wav"
+dest_files=["res://.godot/imported/(LOOP-READY) Track 8 - Upper Quarter_2.wav-0223f4c97e4a6b4a1c11b938833dc70e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

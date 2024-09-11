@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var ray_cast_2 =  $RayCast2D2
 @onready var health_bar = $"../goblin3/Health_Bar_enemy"
 @onready var Player = $"../Player"
+@onready var Death_Sound = $Death_Sound
 
 const SPEED = 150.0
 const JUMP_VELOCITY = -250.0
@@ -20,6 +21,8 @@ var player_vulnerable = null
 var attacking = false
 var attacked = false
 var hurt = false
+var blocked = false
+var tileset = null
 #func _ready():
 	#collision_layer = 1 << 2  # "Enemies" layer is the 3rd layer
 	#collision_mask = ~(1 << 2)  # Invert the mask to exclude the "Enemies" layer
@@ -31,6 +34,7 @@ func _physics_process(delta: float) -> void:
 	# Add gravity
 	#if Health <= 0:
 		#queue_free()
+	
 	velocity += get_gravity() * delta
 	attacking = false
 	attacked = false
@@ -65,7 +69,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * SPEED
 		
 		sprite.play("walking")
-	
+		if blocked and is_on_floor():
+			velocity.y = JUMP_VELOCITY
 		
 		
 	elif attack_range:
@@ -86,7 +91,7 @@ func _physics_process(delta: float) -> void:
 		if Health <= 0:
 			Health = 0
 			sprite.play("death")
-			
+			Death_Sound.play()
 		elif attacked:
 			sprite.play("hurt")
 			Health -= Player.Damage
@@ -100,15 +105,8 @@ func _physics_process(delta: float) -> void:
 		
 	
 	else:
-		if not ray_cast_1.is_colliding() and is_on_floor() or not ray_cast_2.is_colliding() and is_on_floor():
-			sprite.play("walking")
-			if left:
-				velocity.x += 10
-			if right:
-				velocity.x -= 10
-		else:
-			velocity.x = 0
-			sprite.play("idle")
+		velocity.x = 0
+		sprite.play("idle")
 		
 				
 			
@@ -149,6 +147,7 @@ func _on_detection_area_1_body_entered(body: Node2D) -> void:
 	chase = true
 	print("entered chase range")
 	print(body)
+	
 
 
 func _on_detection_area_1_body_exited(body: Node2D) -> void:
@@ -192,8 +191,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		attacked = false
 		hurt = false
 	if sprite.animation == "death":
-		#Death_Timer.start()
-		pass
+		queue_free()
+		
 
 func _on_animated_sprite_2d_animation_looped() -> void:
 	if sprite.animation == "attack_one":
@@ -204,4 +203,24 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 		hurt = false
 	if sprite.animation == "death":
 		queue_free()
-		pass
+		
+
+
+func _on_detect_enviroment_body_entered(body: Node2D) -> void:
+	blocked = true
+	tileset = body
+
+
+func _on_detect_enviroment_body_exited(body: Node2D) -> void:
+	blocked = false
+	tileset = null
+
+
+func _on_detect_enviroment_2_body_entered(body: Node2D) -> void:
+	blocked = true
+	tileset = body
+
+
+func _on_detect_enviroment_2_body_exited(body: Node2D) -> void:
+	blocked = false
+	tileset = null

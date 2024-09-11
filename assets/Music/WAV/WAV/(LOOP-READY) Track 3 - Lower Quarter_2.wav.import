@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://duah6kn5wj2m"
+path="res://.godot/imported/(LOOP-READY) Track 3 - Lower Quarter_2.wav-fbec8b41b27c2c15acd4325f072e680d.sample"
+
+[deps]
+
+source_file="res://assets/Music/WAV/WAV/(LOOP-READY) Track 3 - Lower Quarter_2.wav"
+dest_files=["res://.godot/imported/(LOOP-READY) Track 3 - Lower Quarter_2.wav-fbec8b41b27c2c15acd4325f072e680d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

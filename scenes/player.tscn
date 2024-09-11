@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dq4imiywknlxa"]
+[gd_scene load_steps=71 format=3 uid="uid://dq4imiywknlxa"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_7nwpe"]
 [ext_resource type="Texture2D" uid="uid://cacbu0tjrkt4" path="res://assets/Fantasy Warrior/Sprites/Idle.png" id="1_onyj7"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://q6hmyqwdim52" path="res://assets/Fantasy Warrior/Sprites/Attack2.png" id="5_skf3r"]
 [ext_resource type="Texture2D" uid="uid://cjsb1q23st0d1" path="res://assets/Fantasy Warrior/Sprites/Fall.png" id="6_uyd3t"]
 [ext_resource type="Texture2D" uid="uid://bta634po5kxd0" path="res://assets/Fantasy Warrior/Sprites/Jump.png" id="9_b2qid"]
+[ext_resource type="AudioStream" uid="uid://dl42hildo3pxv" path="res://assets/Sound_Effects/Sword_Slash.mp3" id="11_vvtvd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_krycd"]
 atlas = ExtResource("2_pvdnb")
@@ -287,7 +288,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_one",
-"speed": 10.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -466,9 +467,8 @@ script = ExtResource("1_7nwpe")
 position = Vector2(1, -4.875)
 scale = Vector2(0.925926, 0.898)
 sprite_frames = SubResource("SpriteFrames_o8rrj")
-animation = &"attack_three"
+animation = &"attack_one"
 autoplay = "idle"
-frame_progress = 0.719138
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9.5)
@@ -483,6 +483,12 @@ position = Vector2(0, 9.6875)
 shape = SubResource("RectangleShape2D_pt5v4")
 
 [node name="heal_timer" type="Timer" parent="."]
+
+[node name="Sword_Slash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_vvtvd")
+volume_db = 24.0
+pitch_scale = 3.5
+bus = &"Sound_Effects"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

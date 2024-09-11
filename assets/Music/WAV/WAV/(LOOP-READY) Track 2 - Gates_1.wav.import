@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dj2ir2td5mtt2"
+path="res://.godot/imported/(LOOP-READY) Track 2 - Gates_1.wav-c7eb941f21884ac59e4cbdab255dc777.sample"
+
+[deps]
+
+source_file="res://assets/Music/WAV/WAV/(LOOP-READY) Track 2 - Gates_1.wav"
+dest_files=["res://.godot/imported/(LOOP-READY) Track 2 - Gates_1.wav-c7eb941f21884ac59e4cbdab255dc777.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

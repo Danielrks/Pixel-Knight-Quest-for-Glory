@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ix8nj654awo1"
+path="res://.godot/imported/(LOOP-READY) Track 7 - Spellsingers Guildhall_1.wav-4c6cfbb619f1727c4f034ead04473879.sample"
+
+[deps]
+
+source_file="res://assets/Music/WAV/WAV/(LOOP-READY) Track 7 - Spellsingers Guildhall_1.wav"
+dest_files=["res://.godot/imported/(LOOP-READY) Track 7 - Spellsingers Guildhall_1.wav-4c6cfbb619f1727c4f034ead04473879.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
